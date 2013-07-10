@@ -205,6 +205,33 @@
  @property
 
  @abstract
+ Aliases a string to the distinct ID of the current user.
+
+ @discussion
+ By default, Mixpanel will set the distinct ID to the device's iOS ID for
+ Advertising (IFA). The IFA depends on the the Ad Support framework, which is
+ only available in iOS 6 and later. For earlier platforms, we fallback to ODIN1
+ (see https://code.google.com/p/odinmobile/wiki/ODIN1).
+
+ For tracking events, you do not need to call <code>identify:</code> if you
+ want to use the default.  However, <b>Mixpanel People always requires an
+ explicit call to <code>identify:</code></b>. If calls are made to
+ <code>set:</code>, <code>increment</code> or other <code>MixpanelPeople</code>
+ methods prior to calling <code>identify:</code>, then they are queued up and
+ flushed once <code>identify:</code> is called.
+
+ If you'd like to use the default distinct ID for Mixpanel People as well
+ (recommended), call <code>identify:</code> using the current distinct ID:
+ <code>[mixpanel identify:mixpanel.distinctId]</code>.
+
+ @param alias that uniquely identifies the current user
+ */
+- (void)alias:(NSString *)alias;
+
+/*!
+ @property
+
+ @abstract
  Sets the distinct ID of the current user.
 
  @discussion
