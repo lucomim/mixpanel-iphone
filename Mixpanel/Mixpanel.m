@@ -346,8 +346,8 @@ static Mixpanel *sharedInstance = nil;
 -(void)alias:(NSString *)alias
 {
     @synchronized(self){
-        if ([this.distinctId isEqualToString:alias] || [this.people.distinctId isEqualToString:alias]){ return; }
-        [this track:@"$create_alias" properties:@{@"alias":alias, @"distinctId":self.distinctId}];
+        if ([self.distinctId isEqualToString:alias] || [self.people.distinctId isEqualToString:alias]){ return; }
+        [self track:@"$create_alias" properties:@{@"alias":alias, @"distinctId":self.distinctId}];
     }
 }
 
